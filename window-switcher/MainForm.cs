@@ -57,11 +57,10 @@ namespace WinSwitcher
             switch (e.KeyCode)
             {
                 case Keys.Return:
-                    ActivateWindow();
-                    HideForm();
+                    ProcessKeyReturn();
                     break;
                 case Keys.Escape:
-                    HideForm();
+                    ProcessKeyEscape();
                     break;
             }
         }
@@ -88,6 +87,17 @@ namespace WinSwitcher
             {
                 windowListBox.SelectedIndex--;
             }
+        }
+
+        private void ProcessKeyReturn()
+        {
+            ActivateWindow();
+            HideForm();
+        }
+
+        private void ProcessKeyEscape()
+        {
+            HideForm();
         }
 
         private void windowListBox_TextChanged(object sender, EventArgs e)
