@@ -46,8 +46,6 @@ namespace WinSwitcher
         private void MainForm_Shown(object sender, EventArgs e)
         {
             TopMost = true;
-            keywordTextBox.Focus();
-            UpdateWindowList();
         }
 
         private void MainForm_KeyDown(object sender, KeyEventArgs e)
