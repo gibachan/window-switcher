@@ -3,21 +3,12 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
+using window_switcher;
 
 namespace WinSwitcher
 {
     public partial class MainForm : Form
     {
-        // Hotkey
-        const int MOD_CONTROL = 0x0002;
-        const int MOD_SHIFT = 0x0004;
-        const int WM_HOTKEY = 0x0312;
-        const int HOTKEY_ID = 0x0001; 
-
-        [DllImport("user32.dll")]
-        extern static int RegisterHotKey(IntPtr HWnd, int ID, int MOD_KEY, int KEY);
-        [DllImport("user32.dll")]
-        extern static int UnregisterHotKey(IntPtr HWnd, int ID);
 
         private List<Window> filteredWindows = new List<Window>();
 
@@ -31,7 +22,7 @@ namespace WinSwitcher
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            if (RegisterHotKey(this.Handle, HOTKEY_ID, MOD_CONTROL | MOD_SHIFT, (int)Keys.OemQuestion) == 0)
+            if (HotKeyRegister.Register(this.Handle, (int)Keys.OemQuestion) == false)
             {
                 Console.WriteLine("Error to register hotkey.");
             }
@@ -39,7 +30,7 @@ namespace WinSwitcher
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            UnregisterHotKey(this.Handle, HOTKEY_ID);
+            HotKeyRegister.Unregister(this.Handle);
         }
 
 
@@ -243,9 +234,9 @@ namespace WinSwitcher
         {
             base.WndProc(ref m);
 
-            if (m.Msg == WM_HOTKEY)
+            if (HotKeyRegister.IsHotkeyMessage(m.Msg))
             {
-                if ((int)m.WParam == HOTKEY_ID)
+                if (HotKeyRegister.IsHotkeyId((int)m.WParam))
                 {
                     ShowForm();
                 }
