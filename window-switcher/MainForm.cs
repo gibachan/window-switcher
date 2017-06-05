@@ -46,24 +46,10 @@ namespace WinSwitcher
                 switch (e.KeyCode)
                 {
                     case Keys.Down:
-                        if (windowListBox.SelectedIndex == -1 || windowListBox.SelectedIndex == windowListBox.Items.Count - 1)
-                        {
-                            windowListBox.SelectedIndex = 0;
-                        } 
-                        else
-                        {
-                            windowListBox.SelectedIndex++;
-                        }
+                        ProcessKeyDown();
                         break;
                     case Keys.Up:
-                        if (windowListBox.SelectedIndex == -1 || windowListBox.SelectedIndex == 0)
-                        {
-                            windowListBox.SelectedIndex = windowListBox.Items.Count - 1;
-                        } 
-                        else
-                        {
-                            windowListBox.SelectedIndex--;
-                        }
+                        ProcessKeyUp();
                         break;
                 }
             }
@@ -77,6 +63,30 @@ namespace WinSwitcher
                 case Keys.Escape:
                     HideForm();
                     break;
+            }
+        }
+
+        private void ProcessKeyDown()
+        {
+            if (windowListBox.SelectedIndex == -1 || windowListBox.SelectedIndex == windowListBox.Items.Count - 1)
+            {
+                windowListBox.SelectedIndex = 0;
+            }
+            else
+            {
+                windowListBox.SelectedIndex++;
+            }
+        }
+
+        private void ProcessKeyUp()
+        {
+            if (windowListBox.SelectedIndex == -1 || windowListBox.SelectedIndex == 0)
+            {
+                windowListBox.SelectedIndex = windowListBox.Items.Count - 1;
+            }
+            else
+            {
+                windowListBox.SelectedIndex--;
             }
         }
 
