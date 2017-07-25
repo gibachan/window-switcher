@@ -51,6 +51,7 @@
             // windowListBox
             // 
             this.windowListBox.BackColor = System.Drawing.Color.WhiteSmoke;
+            this.windowListBox.DrawMode = System.Windows.Forms.DrawMode.OwnerDrawFixed;
             this.windowListBox.Font = new System.Drawing.Font("Meiryo UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(128)));
             this.windowListBox.FormattingEnabled = true;
             this.windowListBox.ItemHeight = 20;
@@ -60,6 +61,7 @@
             this.windowListBox.Size = new System.Drawing.Size(576, 104);
             this.windowListBox.TabIndex = 3;
             this.windowListBox.TabStop = false;
+            this.windowListBox.DrawItem += new System.Windows.Forms.DrawItemEventHandler(this.windowListBox_DrawItem);
             this.windowListBox.DoubleClick += new System.EventHandler(this.windowListBox_DoubleClick);
             this.windowListBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.windowListBox_KeyDown);
             // 
@@ -76,19 +78,19 @@
             this.showToolStripMenuItem,
             this.quitToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(104, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(107, 48);
             // 
             // showToolStripMenuItem
             // 
             this.showToolStripMenuItem.Name = "showToolStripMenuItem";
-            this.showToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.showToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.showToolStripMenuItem.Text = "Show";
             this.showToolStripMenuItem.Click += new System.EventHandler(this.showToolStripMenuItem_Click);
             // 
             // quitToolStripMenuItem
             // 
             this.quitToolStripMenuItem.Name = "quitToolStripMenuItem";
-            this.quitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.quitToolStripMenuItem.Size = new System.Drawing.Size(106, 22);
             this.quitToolStripMenuItem.Text = "Quit";
             this.quitToolStripMenuItem.Click += new System.EventHandler(this.quitToolStripMenuItem_Click);
             // 

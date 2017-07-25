@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using window_switcher;
@@ -133,6 +134,22 @@ namespace WinSwitcher
                         break;
                 }
             }
+        }
+
+        private void windowListBox_DrawItem(object sender, DrawItemEventArgs e)
+        {
+            if (e.Index == -1)
+                return;
+
+            var window = filteredWindows[e.Index];
+            var image = IconService.GetIconImage(window.GetProcess());
+            image = (Image)(new Bitmap(image, new Size(16, 16)));
+            e.Graphics.DrawImage(image, e.Bounds.X, e.Bounds.Y);
+            e.Graphics.DrawString(windowListBox.Items[e.Index].ToString(),
+                                  new System.Drawing.Font(windowListBox.Items[e.Index].ToString(), 12),
+                                  new System.Drawing.SolidBrush(System.Drawing.Color.Black),
+                                  e.Bounds.X + image.Width,
+                                  e.Bounds.Y);
         }
 
         private void UpdateWindowList()
