@@ -213,7 +213,7 @@ namespace WinSwitcher
                 }
                 else
                 {
-                    text += "/" + p.ProcessName;
+                    text += " : " + p.ProcessName;
                 }
             }
 
