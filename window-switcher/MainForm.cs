@@ -139,6 +139,8 @@ namespace WinSwitcher
 
         private void windowListBox_DrawItem(object sender, DrawItemEventArgs e)
         {
+            e.DrawBackground();
+
             if (e.Index == -1)
                 return;
 
