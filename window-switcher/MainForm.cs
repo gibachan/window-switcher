@@ -12,6 +12,7 @@ namespace WinSwitcher
     {
 
         private List<Window> filteredWindows = new List<Window>();
+        private IconService iconService = new IconService();
 
         public MainForm()
         {
@@ -142,7 +143,7 @@ namespace WinSwitcher
                 return;
 
             var window = filteredWindows[e.Index];
-            var image = IconService.GetIconImage(window.GetProcess());
+            var image = iconService.GetIconImage(window.GetProcess());
             image = (Image)(new Bitmap(image, new Size(16, 16)));
             e.Graphics.DrawImage(image, e.Bounds.X, e.Bounds.Y);
             e.Graphics.DrawString(windowListBox.Items[e.Index].ToString(),

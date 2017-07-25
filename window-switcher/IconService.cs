@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.Drawing;
 using System.Management;
@@ -8,6 +9,8 @@ namespace window_switcher
 {
     public class IconService
     {
+        private Dictionary<String, Image> cache = new Dictionary<string, Image>();
+
         static private string ProcessExecutablePath(Process process)
         {
             try
@@ -34,16 +37,19 @@ namespace window_switcher
             return "";
         }
 
-        static public Image GetIconImage(Process process)
+        public Image GetIconImage(Process process)
         {
             var path = ProcessExecutablePath(process);
+            if (cache.ContainsKey(path))
+                return cache[path];
+
             var icon = Icon.ExtractAssociatedIcon(path);
             if (icon != null)
-            {
-                var image = icon.ToBitmap();
-                return image;
-            }
-            return null;
+                cache[path] = icon.ToBitmap();
+            else
+                cache[path] = null;
+
+            return cache[path];
         }
     }
 }
