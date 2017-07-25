@@ -43,13 +43,22 @@ namespace window_switcher
             if (cache.ContainsKey(path))
                 return cache[path];
 
-            var icon = Icon.ExtractAssociatedIcon(path);
-            if (icon != null)
-                cache[path] = icon.ToBitmap();
-            else
-                cache[path] = null;
+            try
+            {
 
-            return cache[path];
+                var icon = Icon.ExtractAssociatedIcon(path);
+                if (icon != null)
+                    cache[path] = icon.ToBitmap();
+                else
+                    cache[path] = null;
+
+                return cache[path];
+            }
+            catch
+            {
+                cache[path] = null;
+                return cache[path];
+            }
         }
     }
 }

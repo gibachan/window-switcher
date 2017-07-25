@@ -146,7 +146,14 @@ namespace WinSwitcher
 
             var window = filteredWindows[e.Index];
             var image = iconService.GetIconImage(window.GetProcess());
-            image = (Image)(new Bitmap(image, new Size(16, 16)));
+            if (image != null)
+            {
+                image = (Image)(new Bitmap(image, new Size(16, 16)));
+            }
+            else
+            {
+                image = (Image)(new Bitmap(16, 16));
+            }
             e.Graphics.DrawImage(image, e.Bounds.X, e.Bounds.Y);
             e.Graphics.DrawString(windowListBox.Items[e.Index].ToString(),
                                   new System.Drawing.Font(windowListBox.Items[e.Index].ToString(), 12),
